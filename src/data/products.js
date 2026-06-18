@@ -121,7 +121,7 @@ export const products = [
     ],
     description:
       "The SMR MAK-400 True Wireless Earpods deliver immersive HD audio with deep bass through powerful 10mm drivers. Featuring Bluetooth 5.0, full touch controls, AI assistant support, and up to 35 hours of total playtime, they are designed for uninterrupted entertainment and all-day comfort.",
-    images: ["/images/p41.png", "images/p42.png"],
+    images: ["/images/p41.png", "/images/p42.png"],
   },
   {
     id: "sm-23-dual-usb-charger",
