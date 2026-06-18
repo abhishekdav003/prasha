@@ -5,10 +5,7 @@ export const metadata = {
 };
 
 const team = [
-  { name: "Arjun Sharma", role: "Founder & CEO", emoji: "👨‍💼" },
-  { name: "Priya Mehta", role: "Head of Product", emoji: "👩‍🔬" },
-  { name: "Rohan Verma", role: "Lead Engineer", emoji: "👨‍💻" },
-  { name: "Ananya Singh", role: "Customer Success", emoji: "👩‍💼" },
+  { name: "Sunil", role: "Founder", emoji: "👨‍💼" },
 ];
 
 const milestones = [
