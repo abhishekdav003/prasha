@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-import { WHATSAPP_NUMBER, WHATSAPP_MESSAGE, GOOGLE_FORM_URL } from "@/data/navigation";
+import { WHATSAPP_NUMBER, WHATSAPP_MESSAGE } from "@/data/navigation";
+import { QueryButton } from "@/components/QueryForm";
 
 export default function FloatingButtons() {
   const [showLabels, setShowLabels] = useState(false);
@@ -33,18 +34,15 @@ export default function FloatingButtons() {
             Query Now
           </div>
         )}
-        <a
-          href={GOOGLE_FORM_URL}
-          target="_blank"
-          rel="noopener noreferrer"
+        <QueryButton
           className="fab fab-query"
           title="Send a Query"
-          aria-label="Send a query via Google Form"
+          aria-label="Send a query via quick form"
         >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
           </svg>
-        </a>
+        </QueryButton>
       </div>
 
       {/* WhatsApp FAB */}

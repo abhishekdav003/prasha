@@ -2,6 +2,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
+import { QueryFormProvider } from "@/components/QueryForm";
 
 export const metadata = {
   metadataBase: new URL("https://www.prashaindia.com"),
@@ -65,24 +66,26 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="min-h-screen flex flex-col">
-        <Header />
-        <main className="flex-grow">{children}</main>
-        <Footer />
-        <FloatingButtons />
+        <QueryFormProvider>
+          <Header />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+          <FloatingButtons />
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              name: "Prasha India Pvt Ltd",
-              alternateName: "SMR",
-              url: "https://www.prashaindia.com",
-              logo: "https://www.prashaindia.com/logo.png",
-            }),
-          }}
-        />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                name: "Prasha India Pvt Ltd",
+                alternateName: "SMR",
+                url: "https://www.prashaindia.com",
+                logo: "https://www.prashaindia.com/logo.png",
+              }),
+            }}
+          />
+        </QueryFormProvider>
       </body>
     </html>
   );

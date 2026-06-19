@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
-import { navigation, WHATSAPP_NUMBER, WHATSAPP_MESSAGE, GOOGLE_FORM_URL } from "@/data/navigation";
+import { navigation, WHATSAPP_NUMBER, WHATSAPP_MESSAGE } from "@/data/navigation";
+import { QueryButton } from "@/components/QueryForm";
 
 export default function Footer() {
   const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
@@ -138,23 +139,34 @@ export default function Footer() {
             >
               <span>📱</span> WhatsApp
             </a>
-            <a
-              href={GOOGLE_FORM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "rgba(255,255,255,0.7)", textDecoration: "none", fontSize: "0.9rem", fontWeight: 500, display: "flex", alignItems: "center", gap: "6px", transition: "color 0.2s ease" }}
+            <QueryButton
+              style={{
+                color: "rgba(255,255,255,0.7)",
+                background: "transparent",
+                border: "none",
+                padding: 0,
+                cursor: "pointer",
+                textDecoration: "none",
+                fontSize: "0.9rem",
+                fontWeight: 500,
+                fontFamily: "inherit",
+                display: "flex",
+                alignItems: "center",
+                gap: "6px",
+                transition: "color 0.2s ease",
+              }}
               onMouseEnter={(e) => { e.currentTarget.style.color = "var(--red)"; }}
               onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.7)"; }}
             >
               <span>📋</span> Query Form
-            </a>
+            </QueryButton>
             <a
-              href="mailto:support@Prashaindia.in"
+              href="mailto:support@prashaindia.com"
               style={{ color: "rgba(255,255,255,0.7)", textDecoration: "none", fontSize: "0.9rem", fontWeight: 500, display: "flex", alignItems: "center", gap: "6px", transition: "color 0.2s ease" }}
               onMouseEnter={(e) => { e.currentTarget.style.color = "var(--red)"; }}
               onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.7)"; }}
             >
-              <span>✉️</span> support@Prashaindia.in
+              <span>✉️</span> support@prashaindia.com
             </a>
           </div>
         </div>

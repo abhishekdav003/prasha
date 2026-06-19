@@ -3,7 +3,8 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { products } from "@/data/products";
 import ProductCard from "./ProductCard";
-import { WHATSAPP_NUMBER, GOOGLE_FORM_URL } from "@/data/navigation";
+import { WHATSAPP_NUMBER } from "@/data/navigation";
+import { QueryButton } from "@/components/QueryForm";
 
 function StarRating({ rating, large }) {
   const size = large ? 18 : 12;
@@ -227,15 +228,13 @@ export default function ProductView({ product }) {
                 </svg>
                 WhatsApp Enquiry
               </a>
-              <a
-                href={GOOGLE_FORM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+              <QueryButton
+                product={product.name}
                 className="btn btn-outline"
                 style={{ flex: "1", minWidth: "150px", justifyContent: "center" }}
               >
                 📋 Query Now
-              </a>
+              </QueryButton>
             </div>
 
             {/* Quick specs */}
@@ -368,9 +367,9 @@ export default function ProductView({ product }) {
                 <a href={waLink} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
                   Enquire on WhatsApp
                 </a>
-                <a href={GOOGLE_FORM_URL} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
+                <QueryButton product={product.name} className="btn btn-outline">
                   Submit a Query
-                </a>
+                </QueryButton>
               </div>
             </div>
           )}

@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { navigation } from "@/data/navigation";
+import { QueryButton } from "@/components/QueryForm";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -98,13 +99,12 @@ export default function Header() {
 
           {/* Desktop CTA */}
           <div className="desktop-cta">
-            <Link
-              href="/contact"
+            <QueryButton
               className="btn btn-outline"
               style={{ padding: "9px 20px", fontSize: "0.88rem" }}
             >
               Query Now
-            </Link>
+            </QueryButton>
             <a
               href="https://wa.me/919709018659?text=Hi!%20I'm%20interested%20in%20your%20products."
               target="_blank"
@@ -182,9 +182,13 @@ export default function Header() {
         </nav>
 
         <div className="mobile-cta-block">
-          <Link href="/contact" className="btn btn-outline" style={{ width: "100%", justifyContent: "center" }}>
+          <QueryButton
+            className="btn btn-outline"
+            style={{ width: "100%", justifyContent: "center" }}
+            onClick={() => setMobileOpen(false)}
+          >
             Query Now
-          </Link>
+          </QueryButton>
           <a
             href="https://wa.me/919709018659?text=Hi!%20I'm%20interested%20in%20your%20products."
             target="_blank"
