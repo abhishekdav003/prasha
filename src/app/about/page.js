@@ -114,7 +114,7 @@ export default function AboutPage() {
               margin: "0 auto",
             }}
           >
-            SMR started in 2019 when our founder, Arjun, got fed up with cables
+            SMR started in 2019 when our founder, Sunil, got fed up with cables
             that broke in three months, power banks that lied about capacity,
             and earbuds that fell apart after a year. He decided to build
             better. We've been doing exactly that ever since.

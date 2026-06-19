@@ -13,7 +13,7 @@ export const routes = {
   contact: "/contact",
 };
 
-export const WHATSAPP_NUMBER = "919876543210"; // Replace with real number
+export const WHATSAPP_NUMBER = "919709018659"; // Replace with real number
 export const WHATSAPP_MESSAGE =
   "Hi! I'm interested in your products. Can you help me?";
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
