@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
 import { QueryFormProvider } from "@/components/QueryForm";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
   metadataBase: new URL("https://www.prashaindia.com"),
@@ -86,6 +87,7 @@ export default function RootLayout({ children }) {
             }}
           />
         </QueryFormProvider>
+        <Analytics />
       </body>
     </html>
   );
