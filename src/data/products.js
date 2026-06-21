@@ -617,7 +617,7 @@ export const products = [
     ],
     description:
       "The SMR Magna Series Hi-Res Stereo Earphone delivers premium audio performance in a stylish metal design. Featuring Type-C digital audio output, Hi-Res certified sound, and an integrated HD microphone, it provides immersive listening and effortless calling. Designed with lightweight materials and ergonomic ear tips, it ensures long-lasting comfort for everyday entertainment.",
-    images: ["/images/p201.jpeg", "/images/p202.jpeg"],
+    images: ["/images/p201.png", "/images/p202.png"],
   },
   {
     id: "sm-buds-5-lite-neckband",

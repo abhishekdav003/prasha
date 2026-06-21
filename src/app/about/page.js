@@ -6,6 +6,7 @@ export const metadata = {
 
 const team = [
   { name: "Sunil", role: "Founder", emoji: "👨‍💼" },
+  { name: "Subhash Sharma", role: "Founder", emoji: "👨‍💼" },
 ];
 
 const milestones = [

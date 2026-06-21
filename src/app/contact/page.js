@@ -1,7 +1,8 @@
 "use client";
 import { useState, useRef } from "react";
-import { WHATSAPP_URL, GOOGLE_FORM_URL } from "@/data/navigation";
+import { WHATSAPP_URL } from "@/data/navigation";
 import Link from "next/link";
+import { QueryButton } from "@/components/QueryForm";
 
 const FAQ_ITEMS = [
   {
@@ -504,18 +505,19 @@ export default function ContactPage() {
             </span>
           </a>
 
-          <a
-            href={GOOGLE_FORM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+          <QueryButton
             style={{
               display: "block",
+              width: "100%",
               background: "var(--cream)",
               border: "1.5px solid var(--cream-border)",
               borderRadius: "20px",
               padding: "40px 32px",
               textDecoration: "none",
               color: "var(--ink)",
+              textAlign: "left",
+              cursor: "pointer",
+              fontFamily: "inherit",
             }}
           >
             <div style={{ fontSize: "2.5rem", marginBottom: "16px" }}>📋</div>
@@ -546,7 +548,7 @@ export default function ContactPage() {
             >
               Open Form →
             </span>
-          </a>
+          </QueryButton>
 
           <div
             style={{

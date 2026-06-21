@@ -2,10 +2,18 @@
 import { useEffect, useRef } from "react";
 
 /* ─── Config ─────────────────────────────────────────────────
-   Change objectPosition per image if your subject is off-centre.
-   "center top"   → shows top of image (faces, skylines)
-   "center center" → default midpoint
-   "center bottom" → shows bottom of image
+   Every image is shown FULLY and UNCROPPED (objectFit: "contain").
+   No part of the image is ever cut off — top, bottom, or sides.
+
+   The empty space around a "contain"-fitted image is filled with a
+   soft blurred version of the same image (an industry-standard
+   technique used by Spotify/Apple/YouTube) instead of ugly bars.
+
+   `pos` only affects the decorative blurred backdrop layer (it's
+   fine for that layer to crop, since it's just background texture).
+   "center top"    → backdrop crop favors top of image
+   "center center" → backdrop crop favors midpoint (default)
+   "center bottom" → backdrop crop favors bottom of image
 ──────────────────────────────────────────────────────────── */
 const IMAGES = [
   { src: "/images/img1.png", alt: "Slide 1", pos: "center center" },
@@ -137,10 +145,17 @@ export default function ImageCarousel() {
     /*
      * KEY FIX FOR IMAGE CROPPING:
      * ─────────────────────────────────────────────────────
-     * We do NOT use aspectRatio on the outer wrapper.
-     * Instead the wrapper is height: 100% and the images
-     * use position:absolute + inset:0 so they fill whatever
-     * space the parent gives them — nothing gets clipped.
+     * Each slide now renders TWO stacked images:
+     *   1. A blurred, cover-fit backdrop that fills the box
+     *      (purely decorative — fine if this one crops).
+     *   2. The real image on top with objectFit:"contain",
+     *      which guarantees it is ALWAYS shown in full —
+     *      nothing is ever cut off, regardless of the image's
+     *      own aspect ratio vs. the container's aspect ratio.
+     *
+     * The outer wrapper still does NOT use aspectRatio directly;
+     * it uses height:100% / paddingTop sizing so the slides fill
+     * whatever space the parent gives them.
      *
      * Wrap this component in a div with an explicit height:
      *   <div style={{ height: "500px" }}>
@@ -177,30 +192,60 @@ export default function ImageCarousel() {
             ref={(el) => { slideRefs.current[i] = el; }}
             style={{ position: "absolute", inset: "0" }}
           >
+            {/*
+             * Blurred backdrop layer — same image, cropped + blurred, fills
+             * the entire box edge-to-edge. This is what you see "around"
+             * the real image instead of empty bars. Purely decorative,
+             * so it's fine if this layer crops.
+             */}
+            <img
+              src={img.src}
+              alt=""
+              aria-hidden="true"
+              style={{
+                position:      "absolute",
+                inset:         "-2%", // slightly oversized so the blur edge never shows a hard border
+                width:         "104%",
+                height:        "104%",
+                objectFit:     "cover",
+                objectPosition: img.pos,
+                filter:        "blur(36px) saturate(1.15) brightness(0.65)",
+                transform:     "scale(1.12)",
+                display:       "block",
+                pointerEvents: "none",
+                userSelect:    "none",
+              }}
+              draggable={false}
+            />
+
+            {/* Soft dark wash so the blurred backdrop never fights the foreground image */}
+            <div
+              style={{
+                position:   "absolute",
+                inset:      "0",
+                background: "rgba(10,10,10,0.18)",
+              }}
+            />
+
+            {/*
+             * Foreground layer — the ACTUAL image, fully visible, never
+             * cropped. objectFit:"contain" guarantees the whole image
+             * (top, bottom, both sides) is always shown intact.
+             */}
             <img
               src={img.src}
               alt={img.alt}
               style={{
-                /*
-                 * position:absolute + inset:0 + width/height 100% is
-                 * more reliable than just width/height on a flex child —
-                 * guarantees the img fills the slide div edge-to-edge on
-                 * every screen size with no whitespace.
-                 */
                 position:       "absolute",
                 inset:          "0",
                 width:          "100%",
                 height:         "100%",
-                objectFit:      "cover",
-                /*
-                 * objectPosition controls which part of the image is visible.
-                 * "center center" keeps the midpoint — change per-image above.
-                 * Use "center top" if faces/products are being cut at the top.
-                 */
-                objectPosition: img.pos,
+                objectFit:      "contain",
+                objectPosition: "center center",
                 display:        "block",
                 pointerEvents:  "none",
                 userSelect:     "none",
+                filter:         "drop-shadow(0 12px 32px rgba(0,0,0,0.35))",
               }}
               draggable={false}
             />

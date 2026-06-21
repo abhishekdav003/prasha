@@ -1,6 +1,7 @@
 import FeaturedProducts from "@/components/FeaturedProducts";
 import Hero from "@/components/Hero";
 import ImageCarousel from "@/components/ImageCarousel";
+import Testimonials from "@/components/Testimonials";
 
 export const metadata = {
   title: "Prasha India Pvt Ltd | SMR Premium Mobile Accessories",
@@ -41,6 +42,7 @@ export default function HomePage() {
       <Hero />
       <FeaturedProducts />
       <ImageCarousel />
+      <Testimonials />
     </>
   );
 }

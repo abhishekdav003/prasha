@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 import FeaturedProducts from "@/components/FeaturedProducts";
 import WhyUs from "@/components/WhyUs";
+import Testimonials from "@/components/Testimonials";
 
 export const metadata = {
   title: "SMR — A Quality Product",
@@ -14,6 +15,7 @@ export default function HomePage() {
       <Hero />
       <FeaturedProducts />
       <WhyUs />
+      <Testimonials />
     </>
   );
 }
