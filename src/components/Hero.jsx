@@ -36,9 +36,56 @@ const slides = [
   },
 ];
 
+// Reusable logo pill content — same markup used in both desktop & mobile renders
+function LogoPill({ size = 40, onLoad }) {
+  return (
+    <>
+      <div style={{ position: "relative", width: size, height: size, flexShrink: 0 }}>
+        <Image
+          src="/smrlogo.png"
+          alt="PrashaIndia logo"
+          fill
+          sizes={`${size}px`}
+          style={{ objectFit: "contain" }}
+          priority
+          onLoad={onLoad}
+        />
+      </div>
+      <div style={{ lineHeight: 1 }}>
+        <span
+          style={{
+            fontSize: size >= 40 ? "1.05rem" : "0.95rem",
+            fontWeight: 900,
+            letterSpacing: "-0.03em",
+            color: "var(--ink)",
+            fontFamily: "Inter, sans-serif",
+            display: "block",
+          }}
+        >
+          Prasha<span style={{ color: "var(--red)" }}>India</span>
+        </span>
+        <span
+          style={{
+            fontSize: "0.58rem",
+            fontWeight: 600,
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            color: "var(--ink-faint)",
+            display: "block",
+            marginTop: "2px",
+          }}
+        >
+          Premium Accessories
+        </span>
+      </div>
+    </>
+  );
+}
+
 export default function Hero() {
   const [current, setCurrent] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
+  const [logoLoaded, setLogoLoaded] = useState(false);
   const timerRef = useRef(null);
 
   const goTo = (idx) => {
@@ -63,6 +110,22 @@ export default function Hero() {
 
   const slide = slides[current];
 
+  // Shared pill style
+  const pillStyle = {
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+    background: "rgba(255,255,255,0.85)",
+    backdropFilter: "blur(12px)",
+    WebkitBackdropFilter: "blur(12px)",
+    border: "1px solid rgba(255,255,255,0.95)",
+    borderRadius: "14px",
+    padding: "8px 16px 8px 10px",
+    boxShadow: "0 4px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04)",
+    opacity: logoLoaded ? 1 : 0,
+    transition: "opacity 0.5s ease 0.2s",
+  };
+
   return (
     <section
       style={{
@@ -74,7 +137,7 @@ export default function Hero() {
         overflow: "hidden",
       }}
     >
-      {/* Background accent shapes */}
+      {/* ── Background accent shapes ── */}
       <div
         style={{
           position: "absolute",
@@ -99,7 +162,8 @@ export default function Hero() {
           pointerEvents: "none",
         }}
       />
-      {/* Red vertical stripe accent */}
+
+      {/* ── Red vertical stripe ── */}
       <div
         style={{
           position: "absolute",
@@ -111,6 +175,21 @@ export default function Hero() {
         }}
       />
 
+      {/* ── DESKTOP logo pill — absolute top-right, hidden on mobile via CSS ── */}
+      <div
+        className="hero-logo-desktop"
+        style={{
+          ...pillStyle,
+          position: "absolute",
+          top: "28px",
+          right: "36px",
+          zIndex: 10,
+        }}
+      >
+        <LogoPill size={40} onLoad={() => setLogoLoaded(true)} />
+      </div>
+
+      {/* ── Main hero grid ── */}
       <div
         style={{
           maxWidth: "1280px",
@@ -132,6 +211,13 @@ export default function Hero() {
             transition: "opacity 0.35s ease, transform 0.35s ease",
           }}
         >
+          {/* ── MOBILE logo pill — in-flow above eyebrow, hidden on desktop via CSS ── */}
+          <div className="hero-logo-mobile" style={{ marginBottom: "24px" }}>
+            <div style={pillStyle}>
+              <LogoPill size={36} />
+            </div>
+          </div>
+
           {/* Eyebrow */}
           <div
             style={{
@@ -259,7 +345,7 @@ export default function Hero() {
             justifyContent: "center",
           }}
         >
-          {/* Card behind */}
+          {/* Glow circle behind product */}
           <div
             style={{
               position: "absolute",
@@ -335,14 +421,36 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Responsive CSS injection */}
+      {/* ── Responsive CSS ── */}
       <style>{`
+        /* ── MOBILE (≤768px) ── */
         @media (max-width: 768px) {
           .hero-grid {
             grid-template-columns: 1fr !important;
             text-align: center;
           }
           .hero-grid > div:last-child {
+            display: none !important;
+          }
+          /* Desktop pill: hidden */
+          .hero-logo-desktop {
+            display: none !important;
+          }
+          /* Mobile pill: shown as centred inline-flex */
+          .hero-logo-mobile {
+            display: flex !important;
+            justify-content: center;
+          }
+        }
+
+        /* ── DESKTOP (≥769px) ── */
+        @media (min-width: 769px) {
+          /* Desktop pill: shown */
+          .hero-logo-desktop {
+            display: flex !important;
+          }
+          /* Mobile pill: hidden */
+          .hero-logo-mobile {
             display: none !important;
           }
         }

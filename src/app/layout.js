@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
 import { QueryFormProvider } from "@/components/QueryForm";
+import CatalogButton from "@/components/CatalogButton";
 
 export const metadata = {
   metadataBase: new URL("https://www.prashaindia.com"),
@@ -70,6 +71,7 @@ export default function RootLayout({ children }) {
           <Header />
           <main className="flex-grow">{children}</main>
           <Footer />
+          <CatalogButton />
           <FloatingButtons />
 
           <script
